@@ -25,17 +25,17 @@
       </div>
     </header>
 
-    <main x-data="{change_section: 1}" class="px-6 todo-app main">
+    <main x-data="cs" class="px-6 todo-app main">
       <header>
         <nav class="navbar">
-          <a @click="change_section = 1" class="loginLink" href="#login">登入</a>
-          <a @click="change_section = 2" class="signUpLink" href="#sign_up">註冊</a>
+          <a @click="gotoLogin" class="loginLink" href="#login">登入</a>
+          <a @click="gotoSignUp" class="signUpLink" href="#sign_up">註冊</a>
         </nav>
       </header>
 
       <section id="userSection">
         <!-- Login Section start -->
-        <section x-show="change_section == 1" id="loginSection">
+        <section x-show="showLogin" id="loginSection">
           <h1>登入</h1>
           <form id="loginForm">
             <div class="field">
@@ -61,7 +61,7 @@
             <div class="items-center justify-between block sm:flex field">
               <button>登入</button>
               <div class="text-xl text-gray-600">
-                還沒有帳號嗎？<a @click="change_section = 2" href="#" class="text-link signUpLink">註冊</a>一個吧！
+                還沒有帳號嗎？<a @click="gotoSignUp" href="#" class="text-link signUpLink">註冊</a>一個吧！
               </div>
             </div>
           </form>
@@ -69,7 +69,7 @@
         <!-- Login Section end -->
 
         <!-- Sign Up Section start -->
-        <section x-show="change_section == 2" id="signUpSection">
+        <section x-show="showSignUp" id="signUpSection">
           <h1>註冊帳號</h1>
           <form id="signUpForm">
             <div class="field">
@@ -101,9 +101,7 @@
 
             <div class="items-center justify-between block sm:flex field">
               <button>註冊</button>
-              <div class="text-xl text-gray-600">
-                已經有帳號了？<a href="#" @click="change_section = 1" class="text-link loginLink">登入</a>
-              </div>
+              <div class="text-xl text-gray-600">已經有帳號了？<a href="#" @click="gotoLogin" class="text-link loginLink">登入</a></div>
             </div>
           </form>
         </section>
@@ -111,7 +109,7 @@
       </section>
 
       <!-- TODO Section start -->
-      <section x-show="change_section == 3" id="taskSection">
+      <section x-show="showTask" id="taskSection">
         <form id="todoForm">
           <input type="text" id="taskInput" autocomplete="off" spellcheck="false" placeholder="做點重要的事吧..." />
           <button id="addTodoBtn">新增</button>
