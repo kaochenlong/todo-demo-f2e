@@ -8,9 +8,8 @@
   </head>
   <body>
     <!-- 雙向綁定 -->
-    <div x-data="{message: ''}">
-      <input type="text" x-model.trim="message" />
-      <button :disabled="message == ''">click</button>
-    </div>
+    <form x-data action="/a.php">
+      <button @click.prevent="console.log('hello')">click</button>
+    </form>
   </body>
 </html>
