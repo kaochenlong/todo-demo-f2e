@@ -6,19 +6,20 @@ function changeSection() {
     email: "",
     nickname: "",
     password: "",
+    isLogin: false,
 
     init() {
-      if (this.isLogin()) {
+      const token = localStorage.getItem("todoToken")
+
+      if (token) {
+        this.isLogin = true
+      }
+
+      if (this.isLogin) {
         this.gotoTask()
       } else {
         this.gotoSignUp()
       }
-    },
-
-    isLogin() {
-      const token = localStorage.getItem("todoToken")
-
-      return token != ""
     },
 
     async doLogin() {
@@ -39,6 +40,7 @@ function changeSection() {
 
           if (token) {
             localStorage.setItem("todoToken", token)
+            this.isLogin = true
           }
           this.resetForm()
           this.gotoTask()
