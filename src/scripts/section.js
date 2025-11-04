@@ -2,10 +2,24 @@ import axios from "axios"
 
 function changeSection() {
   return {
-    change_section: "signup",
+    change_section: "",
     email: "",
     nickname: "",
     password: "",
+
+    init() {
+      if (this.isLogin()) {
+        this.gotoTask()
+      } else {
+        this.gotoSignUp()
+      }
+    },
+
+    isLogin() {
+      const token = localStorage.getItem("todoToken")
+
+      return token != ""
+    },
 
     async doLogin() {
       const { email, password } = this
