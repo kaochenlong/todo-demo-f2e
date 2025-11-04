@@ -30,7 +30,7 @@
         <nav class="navbar">
           <a x-show="!isLogin" @click="gotoLogin" class="loginLink" href="#">登入</a>
           <a x-show="!isLogin" @click="gotoSignUp" class="signUpLink" href="#">註冊</a>
-          <a x-show="isLogin" class="signUpLink" href="#">登出</a>
+          <a x-show="isLogin" @click="Logout" class="signUpLink" href="#">登出</a>
         </nav>
       </header>
 
@@ -143,96 +143,6 @@
             <label>
               <input type="checkbox" />
               <p class="content">我要學 Python</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li>
-          <div class="item-content">
-            <label>
-              <input type="checkbox" />
-              <p class="content">我要學 Ruby on Rails</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li class="completed">
-          <div class="item-content">
-            <label>
-              <input type="checkbox" checked />
-              <p class="content">我要學 Git</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li>
-          <div class="item-content">
-            <label>
-              <input type="checkbox" />
-              <p class="content">我要學 JavaScript</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li>
-          <div class="item-content">
-            <label>
-              <input type="checkbox" />
-              <p class="content">我要學 React</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li>
-          <div class="item-content">
-            <label>
-              <input type="checkbox" />
-              <p class="content">我要學 Vue</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
-        <!-- item end -->
-
-        <!-- item start -->
-        <li class="completed">
-          <div class="item-content">
-            <label>
-              <input type="checkbox" checked />
-              <p class="content">我要發大財</p>
             </label>
           </div>
           <div class="item-control">

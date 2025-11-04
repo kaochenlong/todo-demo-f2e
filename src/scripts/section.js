@@ -96,6 +96,28 @@ function changeSection() {
     showTask() {
       return this.change_section == "task"
     },
+    async Logout() {
+      // API
+      const token = localStorage.getItem("todoToken")
+
+      if (token) {
+        const config = {
+          headers: {
+            Authorization: token,
+          },
+        }
+
+        try {
+          const resp = await axios.delete("https://todoo.5xcamp.us/users/sign_out", config)
+
+          localStorage.removeItem("todoToken")
+          this.isLogin = false
+          this.gotoLogin()
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    },
   }
 }
 
