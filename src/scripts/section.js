@@ -101,6 +101,11 @@ function changeSection() {
       this.nickname = ""
     },
 
+    async deleteTask(id) {
+      const resp = await axios.delete(`https://todoo.5xcamp.us/todos/${id}`, this.setConfig())
+      console.log(resp)
+    },
+
     async addTask() {
       if (this.taskName != "") {
         // API
@@ -126,7 +131,10 @@ function changeSection() {
 
         // 換
         const newTask = resp.data
-        console.log(newTask)
+        const idx = this.tasks.findIndex((t) => {
+          return t.id == dummyTask.id
+        })
+        this.tasks.splice(idx, 1, newTask)
 
         // 清除
         this.taskName = ""
