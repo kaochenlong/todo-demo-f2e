@@ -101,9 +101,18 @@ function changeSection() {
       this.nickname = ""
     },
 
-    async deleteTask(id) {
-      const resp = await axios.delete(`https://todoo.5xcamp.us/todos/${id}`, this.setConfig())
-      console.log(resp)
+    deleteTask(id) {
+      const idx = this.tasks.findIndex((t) => {
+        return t.id === id
+      })
+
+      if (idx >= 0) {
+        // 演！
+        this.tasks.splice(idx, 1)
+
+        // 真
+        axios.delete(`https://todoo.5xcamp.us/todos/${id}`, this.setConfig())
+      }
     },
 
     async addTask() {
