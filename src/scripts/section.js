@@ -7,12 +7,17 @@ function changeSection() {
     nickname: "",
     password: "",
     isLogin: false,
+    taskName: "",
+    tasks: [],
 
     init() {
       const token = localStorage.getItem("todoToken")
 
       if (token) {
         this.isLogin = true
+
+        // 抓 TODO
+        this.getTasks()
       }
 
       if (this.isLogin) {
@@ -20,6 +25,24 @@ function changeSection() {
       } else {
         this.gotoSignUp()
       }
+    },
+
+    async getTasks() {
+      const config = this.setConfig()
+      const resp = await axios.get("https://todoo.5xcamp.us/todos", config)
+
+      this.tasks = resp.data.todos
+    },
+
+    setConfig() {
+      const token = localStorage.getItem("todoToken")
+      const config = {
+        headers: {
+          Authorization: token,
+        },
+      }
+
+      return config
     },
 
     async doLogin() {
@@ -76,6 +99,38 @@ function changeSection() {
       this.email = ""
       this.password = ""
       this.nickname = ""
+    },
+
+    async addTask() {
+      if (this.taskName != "") {
+        // API
+        const todoData = {
+          todo: {
+            content: this.taskName,
+          },
+        }
+
+        const config = this.setConfig()
+
+        // 假戲
+        const dummyTask = {
+          id: crypto.randomUUID(),
+          content: this.taskName,
+          completed_at: null,
+        }
+
+        this.tasks.unshift(dummyTask)
+
+        // 真做
+        const resp = await axios.post("https://todoo.5xcamp.us/todos", todoData, config)
+
+        // 換
+        const newTask = resp.data
+        console.log(newTask)
+
+        // 清除
+        this.taskName = ""
+      }
     },
 
     gotoLogin() {

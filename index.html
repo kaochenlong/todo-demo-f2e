@@ -9,7 +9,7 @@
     <script src="src/scripts/todo.js" type="module"></script>
   </head>
 
-  <body class="container px-2 py-4 mx-auto">
+  <body class="container px-2 py-4 mx-auto" x-data="cs">
     <header class="banner">
       <h1><a href="#todo" class="taskLink">TODO!</a></h1>
       <div class="subtitle">
@@ -25,7 +25,7 @@
       </div>
     </header>
 
-    <main x-data="cs" class="px-6 todo-app main">
+    <main class="px-6 todo-app main">
       <header>
         <nav class="navbar">
           <a x-show="!isLogin" @click="gotoLogin" class="loginLink" href="#">登入</a>
@@ -127,8 +127,8 @@
 
       <!-- TODO Section start -->
       <section x-show="showTask" id="taskSection">
-        <form id="todoForm">
-          <input type="text" id="taskInput" autocomplete="off" spellcheck="false" placeholder="做點重要的事吧..." />
+        <form id="todoForm" @submit.prevent="addTask">
+          <input x-model.trim="taskName" type="text" id="taskInput" autocomplete="off" spellcheck="false" placeholder="做點重要的事吧..." />
           <button id="addTodoBtn">新增</button>
         </form>
       </section>
@@ -138,18 +138,20 @@
     <section class="todo-list">
       <ul class="items">
         <!-- item start -->
-        <li>
-          <div class="item-content">
-            <label>
-              <input type="checkbox" />
-              <p class="content">我要學 Python</p>
-            </label>
-          </div>
-          <div class="item-control">
-            <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
-            <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
-          </div>
-        </li>
+        <template x-for="t in tasks">
+          <li>
+            <div class="item-content">
+              <label>
+                <input type="checkbox" />
+                <p class="content" x-text="t.id"></p>
+              </label>
+            </div>
+            <div class="item-control">
+              <a href="#" class="edit"><img class="icon" src="src/assets/pen-to-square-solid.svg" /></a>
+              <a href="#" class="delete"><img class="icon" src="src/assets/trash-can-solid.svg" /></a>
+            </div>
+          </li>
+        </template>
         <!-- item end -->
       </ul>
     </section>
