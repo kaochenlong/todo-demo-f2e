@@ -142,8 +142,8 @@
           <li>
             <div class="item-content">
               <label>
-                <input type="checkbox" />
-                <p class="content" x-text="t.content"></p>
+                <input type="checkbox" @click.prevent="toggleTask(t.id)" />
+                <p class="content" :class="(t.completed_at == null) ? '' : 'line-through text-gray-300'" x-text="t.content"></p>
               </label>
             </div>
             <div class="item-control">

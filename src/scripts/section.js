@@ -101,6 +101,16 @@ function changeSection() {
       this.nickname = ""
     },
 
+    async toggleTask(id) {
+      const idx = this.tasks.findIndex((t) => t.id === id)
+
+      if (idx >= 0) {
+        const resp = await axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
+
+        console.log(resp)
+      }
+    },
+
     deleteTask(id) {
       const idx = this.tasks.findIndex((t) => {
         return t.id === id
