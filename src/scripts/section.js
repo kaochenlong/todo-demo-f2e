@@ -102,8 +102,14 @@ function changeSection() {
       this.nickname = ""
     },
 
-    toggleDebounce: debounce(1000, () => {
-      console.log("go!")
+    toggleDebounce: debounce(1000, function (id, count) {
+      console.log(count)
+
+      if (count % 2 != 0) {
+        console.log("GO!")
+      }
+
+      // axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
     }),
 
     async toggleTask(id) {
@@ -120,15 +126,14 @@ function changeSection() {
         todo.completed_at = new Date()
       }
 
-      // 打 API
-      this.toggleDebounce()
+      if (todo.count == undefined) {
+        todo.count = 0
+      }
+
+      todo.count = todo.count + 1
 
       // 真做
-      // if (todo) {
-      //   const resp = await axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
-
-      //   console.log(resp)
-      // }
+      this.toggleDebounce(id, todo.count)
     },
 
     deleteTask(id) {
