@@ -1,4 +1,5 @@
 import axios from "axios"
+import { debounce } from "throttle-debounce"
 
 function changeSection() {
   return {
@@ -101,14 +102,33 @@ function changeSection() {
       this.nickname = ""
     },
 
+    toggleDebounce: debounce(1000, () => {
+      console.log("go!")
+    }),
+
     async toggleTask(id) {
-      const idx = this.tasks.findIndex((t) => t.id === id)
+      // 假戲
+      const todo = this.tasks.find((t) => {
+        return t.id == id
+      })
 
-      if (idx >= 0) {
-        const resp = await axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
-
-        console.log(resp)
+      if (todo.completed_at) {
+        // 已完成
+        todo.completed_at = null
+      } else {
+        // 未完成
+        todo.completed_at = new Date()
       }
+
+      // 打 API
+      this.toggleDebounce()
+
+      // 真做
+      // if (todo) {
+      //   const resp = await axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
+
+      //   console.log(resp)
+      // }
     },
 
     deleteTask(id) {
