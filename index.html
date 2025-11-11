@@ -135,7 +135,7 @@
       <!-- TODO Section end -->
     </main>
 
-    <section class="todo-list">
+    <section class="todo-list" x-show="tasks.length != 0">
       <ul class="items">
         <!-- item start -->
         <template x-for="t in tasks">

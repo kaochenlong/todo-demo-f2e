@@ -145,6 +145,9 @@ function changeSection() {
 
         this.tasks.unshift(dummyTask)
 
+        // 清除
+        this.taskName = ""
+
         // 真做
         const resp = await axios.post("https://todoo.5xcamp.us/todos", todoData, config)
 
@@ -154,9 +157,6 @@ function changeSection() {
           return t.id == dummyTask.id
         })
         this.tasks.splice(idx, 1, newTask)
-
-        // 清除
-        this.taskName = ""
       }
     },
 
