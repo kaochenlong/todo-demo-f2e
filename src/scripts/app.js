@@ -68,6 +68,9 @@ function changeSection() {
           }
           this.resetForm()
           this.gotoTask()
+
+          // 取得 tasks
+          this.getTasks()
         } catch (err) {
           console.log(err)
         }
@@ -208,7 +211,6 @@ function changeSection() {
       return this.change_section == "task"
     },
     async Logout() {
-      // API
       const token = localStorage.getItem("todoToken")
 
       if (token) {
@@ -224,6 +226,9 @@ function changeSection() {
           localStorage.removeItem("todoToken")
           this.isLogin = false
           this.gotoLogin()
+
+          // 清空
+          this.tasks = []
         } catch (err) {
           console.log(err)
         }
