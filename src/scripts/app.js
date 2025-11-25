@@ -10,6 +10,7 @@ function changeSection() {
     isLogin: false,
     taskName: "",
     tasks: [],
+    taskValue: "",
 
     init() {
       const token = localStorage.getItem("todoToken")
@@ -44,6 +45,40 @@ function changeSection() {
       }
 
       return config
+    },
+
+    updateTodo(id) {
+      const todo = this.tasks.find((t) => {
+        return t.id == id
+      })
+
+      todo.isEditing = false
+
+      // API
+      if (todo.content != this.taskValue) {
+        todo.content = this.taskValue
+
+        const todoData = {
+          todo: {
+            content: this.taskValue,
+          },
+        }
+
+        axios.put(`https://todoo.5xcamp.us/todos/${id}`, todoData, this.setConfig())
+      }
+    },
+
+    toggleEdit(id) {
+      this.tasks.forEach((t) => (t.isEditing = false))
+
+      const todo = this.tasks.find((t) => {
+        return t.id == id
+      })
+
+      if (todo) {
+        this.taskValue = todo.content
+        todo.isEditing = !todo.isEditing
+      }
     },
 
     async doLogin() {
@@ -110,8 +145,6 @@ function changeSection() {
 
       // reset count
       todo.count = 0
-
-      console.log(count)
 
       if (count % 2 != 0) {
         // 判斷奇數次 click
