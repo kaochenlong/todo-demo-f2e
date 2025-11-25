@@ -102,14 +102,18 @@ function changeSection() {
       this.nickname = ""
     },
 
-    toggleDebounce: debounce(1000, function (id, count) {
+    toggleDebounce: debounce(1000, function (id, todo) {
+      const { count } = todo
+
+      // reset count
+      todo.count = 0
+
       console.log(count)
 
       if (count % 2 != 0) {
-        console.log("GO!")
+        // 判斷奇數次 click
+        axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
       }
-
-      // axios.patch(`https://todoo.5xcamp.us/todos/${id}/toggle`, null, this.setConfig())
     }),
 
     async toggleTask(id) {
@@ -133,7 +137,7 @@ function changeSection() {
       todo.count = todo.count + 1
 
       // 真做
-      this.toggleDebounce(id, todo.count)
+      this.toggleDebounce(id, todo)
     },
 
     deleteTask(id) {
